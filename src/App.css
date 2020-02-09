@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #000;
+  height: 100px;
+  align-items: center;
+}
+.App-header img{
+  height: 100%;
+}
+
+.login-box input{
+  width: 300px;
+  font-size: 16px;
+  height: 20px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+.login-box button {
+  background: #000;
+  border: none;
+  outline: none;
+  height: 30px;
+  font-size: 16px;
+  color: #e7d315;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.planet{
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 10px;
+  max-width: 600px;
+  margin: 0 auto 10px;
+}
