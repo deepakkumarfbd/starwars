@@ -9,27 +9,28 @@ class Login extends React.Component {
         if(sessionStorage.getItem("loginState")) {
             props.history.push("/search");
         }
-
     }
 
     login = () => {
         axios.get(`https://swapi.co/api/people?search=${this.refs.username.value}`)
         .then((response) => {
-            console.log(response);
-            console.log(this.refs.password.value)
-            if(response.data.results[0].birth_year === this.refs.password.value){
-                console.log(this.props);
+            if(response.data.results[0].birth_year === this.refs.password.value && response.data.results[0].name.toLowerCase() === this.refs.username.value.toLowerCase()){
                 sessionStorage.setItem("loginState", true)
-                // this.props.updateState({loginState: true});
                 this.props.history.push("/search");
             } else {
-                console.log("credantiol not matched");
+                this.showError('Credential not matched')
             }
-  
         })
         .catch((error) => {
             console.log(error)
         })
+    }
+
+    showError = error => {
+        this.props.updateState({error})
+        this.setTimeout(() => {
+            this.props.updateState({error:''})
+        },2000)
     }
   
 
@@ -39,6 +40,9 @@ class Login extends React.Component {
                 <h2>Login</h2>
                 <input type="text" name="username"  ref="username" /><br />
                 <input type="password" name="password" ref="password" /><br />
+                {this.props.error &&
+                    <span className="error">{this.props.error}</span>
+                }
                 <button onClick={this.login}>Login</button>
             </div>
         )
@@ -46,7 +50,8 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    loginState: state.loginState
+    loginState: state.loginState,
+    error: state.error,
 })
 const mapDispatchToProps = dispatch => ({
     updateState: obj => dispatch(updateState(obj))

@@ -14,62 +14,28 @@ class Search extends React.Component {
     getPlanets = e => {
         axios.get(`https://swapi.co/api/planets?search=${e.target.value}`)
         .then(response => {
-            this.props.updateState({planetsList:response.data.results})
+            let results = response.data.results;
+            results.sort((a,b) => (a.population === "unknown" ? -1 : a.population - b.population))  
+            this.props.updateState({planetsList:results})
         })
         .catch(error => {
             console.log(error)
         })
     }
 
-    getFontSize = population => {
-        if(population < 10000){
-            return "10px"
-        }else if(population < 50000){
-            return "11px"
-        }else if(population < 100000){
-            return "12px"
-        } else if (population < 1000000){
-            return "13px"
-        } else if(population < 5000000){
-            return "14px"
-        }else if(population < 10000000){
-            return "15px"
-        }else if(population < 50000000) {
-            return "16px"
-        }else if(population < 100000000) {
-            return "17px"
-        }else if(population < 200000000) {
-            return "18px"
-        }else if(population < 500000000) {
-            return "19px"
-        }else if(population < 1000000000) {
-            return "20px"
-        }else if(population < 5000000000) {
-            return "21px"
-        }else if(population < 10000000000) {
-            return "22px"
-        }else if(population < 50000000000) {
-            return "23px"
-        }else if(population < 100000000000) {
-            return "24px"
-        }else if(population < 500000000000) {
-            return "25px"
-        }else if(population < 10000000000000) {
-            return "26px"
-        }else if(population < 50000000000000) {
-            return "27px"
-        }else if(population < 100000000000000) {
-            return "28px"
-        }
+    logout = () => {
+        sessionStorage.clear();
+        this.props.history.push("/")
     }
 
     render(){
         return (
             <div className="login-box">
+                <strong className="logout" onClick={this.logout}>Logout</strong>
                 <h2>Search</h2>
                 <input type="text" name="searchPlanets" onChange={e => this.getPlanets(e)} />
                 {this.props.planetsList.map((item, index) => (
-                    <div key={index} className="planet" style={{fontSize:this.getFontSize(item.population)}}>
+                    <div key={index} className="planet" style={{fontSize:`${11+index}px`}}>
                         <strong>Planet name : {item.name}</strong><br/>
                         <span>Population: {item.population}</span>
                     </div>

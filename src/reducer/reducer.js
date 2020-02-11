@@ -1,5 +1,6 @@
 const initialState = {
-    planetsList:[]
+    planetsList:[],
+    error:''
 }
 
 export  const changeState = (state=initialState, action) => {

@@ -25,6 +25,9 @@ code {
   height: 100%;
 }
 
+.login-box {
+  position: relative;
+}
 .login-box input{
   width: 300px;
   font-size: 16px;
@@ -49,4 +52,16 @@ code {
   font-size: 10px;
   max-width: 600px;
   margin: 0 auto 10px;
+}
+.error {
+  color: #f00;
+  display: block;
+  padding: 0 0 10px;
+}
+.logout {
+  position: absolute;
+  right: 0;
+  top: -60px;
+  color: #fff;
+  padding: 10px;
 }
