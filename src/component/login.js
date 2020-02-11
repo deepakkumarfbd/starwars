@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import {updateState} from "../action/action.js"
+import {getApiData} from "../action/action.js"
 
 class Login extends React.Component {
     constructor(props){
@@ -27,10 +27,11 @@ class Login extends React.Component {
     }
 
     showError = error => {
+        console.log(error)
         this.props.updateState({error})
-        this.setTimeout(() => {
-            this.props.updateState({error:''})
-        },2000)
+        // setTimeout(() => {
+        //     this.props.updateState({error:''})
+        // },2000)
     }
   
 
@@ -53,7 +54,8 @@ const mapStateToProps = state => ({
     loginState: state.loginState,
     error: state.error,
 })
-const mapDispatchToProps = dispatch => ({
-    updateState: obj => dispatch(updateState(obj))
-})
+const mapDispatchToProps = {
+    updateState: obj => getApiData(obj)
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
